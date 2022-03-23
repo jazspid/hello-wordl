@@ -6,8 +6,8 @@ export enum Difficulty {
   UltraHard,
 }
 
-export const gameName = "hello wordl";
-export const maxGuesses = 6;
+export const gameName = "ponydl";
+export const maxGuesses = 10;
 
 export const dictionarySet: Set<string> = new Set(dictionary);
 
@@ -62,7 +62,7 @@ export function ordinal(n: number): string {
 }
 
 export const englishNumbers =
-  "zero one two three four five six seven eight nine ten eleven".split(" ");
+  "zero one two three four five six seven eight nine ten eleven twelve thirteen forteen fifteen sixteen".split(" ");
 
 export function describeSeed(seed: number): string {
   const year = Math.floor(seed / 10000);

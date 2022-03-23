@@ -80,7 +80,7 @@ function App() {
         >
           hell
         </span>
-        o wordl
+        o ponydl
       </h1>
       <div className="top-right">
         {page !== "game" ? (

@@ -6,15 +6,15 @@ export function About() {
   return (
     <div className="App-about">
       <p>
-        <i>{gameName}</i> is a remake of the word game{" "}
+        <i>{gameName}</i> is a remake of remake of the word game{" "}
         <a href="https://www.powerlanguage.co.uk/wordle/">
           <i>Wordle</i>
         </a>{" "}
         by <a href="https://twitter.com/powerlanguish">powerlanguage</a>, which
-        I think is based on the TV show <i>Lingo</i>.
+        I think is based on the TV show <i>Lingo</i>. The original remake game is at <a href="https://hellowordl.net">https://hellowordl.net</a>.
       </p>
       <p>
-        You get {maxGuesses} tries to guess a target word.
+        You get {maxGuesses} tries to guess a pony's name from the MLP show, which is ripped from fandom wiki. To make it easier, any two valid words squeezed together make a valid string too.
         <br />
         After each guess, you get Mastermind-style feedback.
       </p>
@@ -79,7 +79,7 @@ export function About() {
         This game will be free and ad-free forever,
         <br />
         but you can <a href="https://ko-fi.com/chordbug">buy me a coffee</a> if
-        you'd like.
+        you'd like. All credits goes to the original author, I'm just ashamed.
       </p>
     </div>
   );

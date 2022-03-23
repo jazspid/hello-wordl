@@ -178,8 +178,17 @@ function Game(props: GameProps) {
         setHint("Too short");
         return;
       }
-      if (!dictionary.includes(currentGuess)) {
-        setHint("Not a valid word");
+      let cg1:string;
+      let cg2:string;
+      let pos:number;
+      let flag=false;
+      for(pos=1;pos<currentGuess.length;pos++) {
+        cg1=currentGuess.slice(0,pos);
+        cg2=currentGuess.slice(pos);
+        flag=flag||(dictionary.includes(cg1)&&dictionary.includes(cg2));
+      }
+      if (!flag) {
+        setHint("Not a valid string");
         return;
       }
       for (const g of guesses) {

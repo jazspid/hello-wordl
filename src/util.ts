@@ -1,4 +1,5 @@
 import dictionary from "./dictionary.json";
+import pinfo from "./ponies.json";
 
 export enum Difficulty {
   Normal,
@@ -9,7 +10,7 @@ export enum Difficulty {
 export const gameName = "ponydl";
 export const maxGuesses = 10;
 
-export const dictionarySet: Set<string> = new Set(dictionary);
+export const dictionarySet: Set<string> = new Set(dictionary.concat(Object.keys(pinfo)));
 
 function mulberry32(a: number) {
   return function () {

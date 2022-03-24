@@ -3,7 +3,7 @@ import { Row, RowState } from "./Row";
 import dictionary from "./dictionary.json";
 import { Clue, clue, describeClue, violation } from "./clue";
 import { Keyboard } from "./Keyboard";
-import targetList from "./targets.json";
+import pinfo from "./ponies.json";
 import {
   describeSeed,
   dictionarySet,
@@ -31,7 +31,8 @@ interface GameProps {
   keyboardLayout: string;
 }
 
-const targets = targetList; 
+const targets = Object.keys(pinfo); 
+const dict=dictionary.concat(targets);
 const minLength = 4;
 const defaultLength = 10;
 const maxLength = 15;
@@ -102,6 +103,10 @@ function Game(props: GameProps) {
       ? `Invalid challenge string, playing random game.`
       : `Make your first guess!`
   );
+  const [PonyInfo, returnPonyInfo] = useState<JSX.Element>(
+  <div id="ponyinfo">
+  </div>
+  )
   const currentSeedParams = () =>
     `?seed=${seed}&length=${wordLength}&game=${gameNumber}`;
   useEffect(() => {
@@ -185,9 +190,9 @@ function Game(props: GameProps) {
       for(pos=1;pos<currentGuess.length;pos++) {
         cg1=currentGuess.slice(0,pos);
         cg2=currentGuess.slice(pos);
-        flag=flag||(dictionary.includes(cg1)&&dictionary.includes(cg2));
+        flag=flag||(dict.includes(cg1)&&dict.includes(cg2));
       }
-      flag=flag||(dictionary.includes(currentGuess));
+      flag=flag||(dict.includes(currentGuess));
       if (!flag) {
         setHint("Not a valid string");
         return;
@@ -210,9 +215,19 @@ function Game(props: GameProps) {
 
       if (currentGuess === target) {
         setHint(gameOver("won"));
+        let pinfostr:any=`
+              <p>The pony/ies is/are <b>`+pinfo[target as keyof typeof pinfo][0]+`.</b></p>
+        <p>Are you familiar with him/her/it/them?</p>`+
+        pinfo[target as keyof typeof pinfo][1] as unknown as JSX.Element;
+              document.getElementById("ponyinfo")!.innerHTML=pinfostr;
         setGameState(GameState.Won);
       } else if (guesses.length + 1 === props.maxGuesses) {
         setHint(gameOver("lost"));
+        let pinfostr:any=`
+        <p>The pony/ies is/are <b>`+pinfo[target as keyof typeof pinfo][0]+`.</b></p>
+  <p>Are you familiar with him/her/it/them?</p>`+
+  pinfo[target as keyof typeof pinfo][1] as unknown as JSX.Element;
+        document.getElementById("ponyinfo")!.innerHTML=pinfostr;
         setGameState(GameState.Lost);
       } else {
         setHint("");
@@ -301,6 +316,11 @@ function Game(props: GameProps) {
             setHint(
               `The answer was ${target.toUpperCase()}. (Enter to play again)`
             );
+            let pinfostr:any=`
+            <p>The pony/ies is/are <b>`+pinfo[target as keyof typeof pinfo][0]+`.</b></p>
+      <p>Are you familiar with him/her/it/them?</p>`+
+      pinfo[target as keyof typeof pinfo][1] as unknown as JSX.Element;
+              document.getElementById("ponyinfo")!.innerHTML=pinfostr;
             setGameState(GameState.Lost);
             (document.activeElement as HTMLElement)?.blur();
           }}
@@ -325,6 +345,7 @@ function Game(props: GameProps) {
       >
         {hint || `\u00a0`}
       </p>
+      {PonyInfo}
       <Keyboard
         layout={props.keyboardLayout}
         letterInfo={letterInfo}

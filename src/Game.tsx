@@ -187,6 +187,7 @@ function Game(props: GameProps) {
         cg2=currentGuess.slice(pos);
         flag=flag||(dictionary.includes(cg1)&&dictionary.includes(cg2));
       }
+      flag=flag||(dictionary.includes(currentGuess));
       if (!flag) {
         setHint("Not a valid string");
         return;
